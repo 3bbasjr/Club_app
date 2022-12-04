@@ -2,44 +2,29 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:jezira/modules/forgotPasswordScreen.dart';
 import 'package:jezira/modules/loginScreen.dart';
-import 'package:jezira/modules/register_Screen.dart';
 import 'package:jezira/modules/verify_screen.dart';
+import 'package:jezira/shared/appbutton.dart';
 import 'package:jezira/shared/colors.dart';
 import 'package:jezira/shared/components.dart';
 import 'package:jezira/shared/textFormField.dart';
-import 'package:jezira/shared/textFormField.dart';
 
-class resetPasswordScreen extends StatefulWidget {
-  const resetPasswordScreen({Key? key}) : super(key: key);
+class registerScreen extends StatefulWidget {
+  const registerScreen({Key? key}) : super(key: key);
 
   @override
-  State<resetPasswordScreen> createState() => _resetPasswordScreenState();
+  State<registerScreen> createState() => _registerScreenState();
 }
 
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-class _resetPasswordScreenState extends State<resetPasswordScreen> {
-  void Validation() {
-    final FormState _form = _formKey.currentState!;
-    if (_form.validate()) {
-      print('Yes');
-    } else {
-      print("no");
-    }
-  }
+class _registerScreenState extends State<registerScreen> {
 
-
-
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  TextEditingController membershipController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    bool obscure = true;
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -59,14 +44,14 @@ class _resetPasswordScreenState extends State<resetPasswordScreen> {
                     height: 12,
                   ),
                   Text(
-                    'Reset Password',
+                    'Welcome,\nEnter your details to start',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
                   ),
                   SizedBox(
                     height: 12,
                   ),
                   Text(
-                    'Add a new password',
+                    'you will receive a 5 digit code to verify next',
                     style: TextStyle(
                       color: Colors.grey,
                       fontSize: 16,
@@ -77,49 +62,38 @@ class _resetPasswordScreenState extends State<resetPasswordScreen> {
                     height: 34,
                   ),
                   Text(
-                    'Password',
+                    'Membership No.',
                     style: TextStyle(
                       color: Colors.grey,
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
                     ),
-                  ), textFormField(
-                    controller: passwordController,
-                    keyboardType: TextInputType.visiblePassword),
+                  ),
+              textFormField(controller: membershipController,keyboardType: TextInputType.number,),
                   SizedBox(
                     height: 10,
                   ),
                   Text(
-                    'Confirm Password',
+                    'Mobile No.',
                     style: TextStyle(
                       color: Colors.grey,
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  textFormField(
-                    controller: passwordController,
-                    keyboardType: TextInputType.visiblePassword,),
-
-
+                  textFormField(controller: phoneController,
+                  keyboardType: TextInputType.number,),
                   SizedBox(
                     height: 34,
                   ),
-                  Container(
-                    width: double.infinity,
-                    color: Colors.blue,
-                    height: 60,
-                    child: TextButton(
-                        onPressed: () {
-                          Validation();
-
-                        },
-                        child: Text(
-                          'Confirm',
-                          style: TextStyle(color: Colors.white),
-                        )),
-                  ),
-
+appbutton(text: 'Next',
+onpressed: (){
+  if(_formKey.currentState!.validate()){
+    print('validate');
+  }else{
+    print('validate error');
+  }
+},),
                   // defaultButton(
                   //     background: AppColors.primary_color,
                   // function: (){
@@ -131,7 +105,38 @@ class _resetPasswordScreenState extends State<resetPasswordScreen> {
                   //       ));
                   // },
                   // text:'Next' ),
-
+                  SizedBox(
+                    height: 34,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Already have account?  ',
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 14,
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.push(context,
+                              MaterialPageRoute(
+                                  builder: (context){
+                                    return loginScreen();
+                                  }
+                              ));
+                        },
+                        child: Text(
+                          'Login',
+                          style: TextStyle(
+                            color: AppColors.primary_color,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
                 ],
               ),
             ),

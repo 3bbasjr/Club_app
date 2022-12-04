@@ -1,18 +1,11 @@
-import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:form_field_validator/form_field_validator.dart';
-import 'package:hexcolor/hexcolor.dart';
-import 'package:jezira/modules/forgotPasswordScreen.dart';
-import 'package:jezira/modules/loginScreen.dart';
-import 'package:jezira/modules/register_Screen.dart';
-import 'package:jezira/modules/verify_screen.dart';
-import 'package:jezira/shared/appbutton.dart';
+import 'package:jezira/screens/settingScreen.dart';
+import 'package:jezira/screens/verify_editProfileScreen.dart';
 import 'package:jezira/shared/colors.dart';
-import 'package:jezira/shared/components.dart';
-import 'package:jezira/shared/textFormField.dart';
 import 'package:jezira/shared/textFormField.dart';
 
+import '../shared/components.dart';
 class editProfileScreen extends StatefulWidget {
   const editProfileScreen({Key? key}) : super(key: key);
 
@@ -126,7 +119,9 @@ class _editProfileScreenState extends State<editProfileScreen> {
                           border: Border.all(color: AppColors.primary_color),
                           color: AppColors.white_color
                         ),
-                        child: TextButton(onPressed: (){},
+                        child: TextButton(onPressed: (){
+                          NavigateTo(context,settingScreen());
+                        },
                             child: Text('Cancle',
                             style: TextStyle(
                               color: AppColors.primary_color,
@@ -140,7 +135,9 @@ class _editProfileScreenState extends State<editProfileScreen> {
                           borderRadius: BorderRadius.circular(10),
                           color: AppColors.primary_color
                         ),
-                        child: TextButton(onPressed: (){},
+                        child: TextButton(onPressed: (){
+                          NavigateTo(context,verify_editProfileScreen());
+                        },
                             child: Text('Save',
                             style: TextStyle(
                               color: Colors.white,

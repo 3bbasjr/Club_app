@@ -22,24 +22,13 @@ class loginScreen extends StatefulWidget {
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
 class _loginScreenState extends State<loginScreen> {
-  void Validation() {
-    final FormState _form = _formKey.currentState!;
-    if (_form.validate()) {
-      print('Yes');
-    } else {
-      print("no");
-    }
-  }
 
 
-
-  TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    bool obscure = true;
 
     return Scaffold(
       appBar: AppBar(
@@ -86,7 +75,8 @@ class _loginScreenState extends State<loginScreen> {
                     ),
                   ),
                   textFormField(
-                    controller: phoneController, keyboardType: TextInputType.number,),
+                    controller: phoneController,
+                    keyboardType: TextInputType.number,),
                   SizedBox(
                     height: 10,),
                   Text(
@@ -97,17 +87,22 @@ class _loginScreenState extends State<loginScreen> {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  textFormField(controller: passwordController, keyboardType: TextInputType.visiblePassword,
+                  textFormField(controller: passwordController,
+
+                      keyboardType: TextInputType.visiblePassword,
+                    isPassword: true,
+
                   ),
+                  SizedBox(height: 25,),
 
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       GestureDetector(
-                        onTap: (){
+                        onTap: () {
                           Navigator.push(context,
                               MaterialPageRoute(
-                                  builder: (context){
+                                  builder: (context) {
                                     return forgotPasswordScreen();
                                   }
                               ));
@@ -126,7 +121,13 @@ class _loginScreenState extends State<loginScreen> {
                   SizedBox(
                     height: 34,
                   ),
-                  appbutton(text: 'Login'),
+                  appbutton(text: 'Login', onpressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      print('validate');
+                    } else {
+                      print('validate error');
+                    }
+                  }),
                   SizedBox(
                     height: 34,
                   ),
@@ -141,10 +142,10 @@ class _loginScreenState extends State<loginScreen> {
                         ),
                       ),
                       GestureDetector(
-                        onTap: (){
+                        onTap: () {
                           Navigator.push(context,
                               MaterialPageRoute(
-                                  builder: (context){
+                                  builder: (context) {
                                     return registerScreen();
                                   }
                               ));
